@@ -8,13 +8,16 @@ Example for booking microservice
 4. docker run --name booking-microservice -p 8083:8083 booking-microservice-picture
 
 ------------------------II- Pushing DOCKER images to DOCKERHUB---------------------------------------
+N.B. u need to hv an account in docker-hub and create a repository in it first.
 5. change name of image using : docker tag api-gateway-picture lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
 6. push image to docker hub : docker push lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
 
 ------------------------III- Pulling DOCKER images and using docker compose.yml file--------------------------------------------------
 7. pulling the images
+8. creating container of database (mysql)
 8. creating the compose.yml file
-9. running the compose.yml file and the whole project
+9. running the compose.yml file and the whole project (demo)
+N.B. no need to create the containers since the docker-compose.file will take care of that and of all apppropriate instanciation
 
 
 
