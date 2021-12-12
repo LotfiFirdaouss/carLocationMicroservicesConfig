@@ -1,0 +1,111 @@
+version: '2.2'
+services:
+
+    mysql-server_1:
+      container_name : mysql-container_1
+      image : mysql:5
+      expose: 
+        - 9091
+      ports:
+        - 9091:9091
+      networks:
+        - booking-network
+      environment:
+         MYSQL_ROOT_PASSWORD: rootpwd
+         MYSQL_DATABASE: bookingDB
+
+    mysql-server_2:
+      container_name : mysql-container_2
+      image : mysql:5
+      expose: 
+        - 9092
+      ports:
+        - 9092:9092
+      networks:
+        - booking-network
+      environment:
+         MYSQL_ROOT_PASSWORD: rootpwd
+         MYSQL_DATABASE: vehiculeDB
+
+    config-server:
+        container_name: config-server
+        image: lotfi01fifi/car-location-microservices_repo_01:config-server-picture
+        expose:
+            - 8087
+        ports:
+            - 8087:8087
+        networks:
+            - booking-network
+
+    spring-eureka-server:
+        container_name: spring-eureka
+        image: lotfi01fifi/car-location-microservices_repo_01:spring-eureka-picture
+        expose:
+            - 8086
+        ports:
+            - 8086:8086
+        networks:
+            - booking-network
+
+    booking-microservice:
+        container_name: booking-microservice
+        image: lotfi01fifi/car-location-microservices_repo_01:booking-microservice-picture
+        environment:
+            SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-server:8087"}}}}'
+        expose:
+            - 8083
+        ports:
+            - 8083:8083
+        networks:
+            - booking-network
+        links:
+            - config-server:config-server
+            - spring-eureka-server:spring-eureka-server
+            - mysql-server_1:mysql-server_1
+        depends_on:
+            - config-server
+            - spring-eureka-server
+        logging:
+            driver: json-file
+    
+    vehicule-microservice:
+        container_name: vehicule-microservice
+        image: lotfi01fifi/car-location-microservices_repo_01:vehicule-microservice-picture
+        environment:
+            SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://config-server:8087"}}}}'
+        expose:
+            - 8080
+        ports:
+            - 8080:8080
+        networks:
+            - booking-network
+        links:
+            - config-server:config-server
+            - spring-eureka-server:spring-eureka-server
+            - mysql-server_2:mysql-server_2
+        depends_on:
+            - config-server
+            - spring-eureka-server
+        logging:
+            driver: json-file
+    
+    API-gateway:
+        container_name: api-gateway
+        image: lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
+        expose:
+            - 9090
+        ports:
+            - 9090:9090
+        networks:
+            - booking-network
+        links:
+            - spring-eureka-server:spring-eureka-server
+        depends_on:
+            - spring-eureka-server
+        logging:
+            driver: json-file
+
+networks:
+    booking-network:
+        external : true
+        driver: bridge
