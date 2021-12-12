@@ -13,8 +13,8 @@ Example for booking microservice
 
 ------------------------III- Pulling DOCKER images and using docker compose.yml file--------------------------------------------------
 7. pulling the images
-8. creating the composite.yml file
-9. running the composite.yml file and the whole project
+8. creating the compose.yml file
+9. running the compose.yml file and the whole project
 
 
 
