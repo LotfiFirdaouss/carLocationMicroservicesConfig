@@ -7,3 +7,11 @@ Example for booking microservice
 
 
 mysql container::::: sql credentials: root/rootpwd
+
+
+Docker images names:
+*lotfi01fifi/car-location-microservices_repo_01:vehicule-microservice-picture
+*lotfi01fifi/car-location-microservices_repo_01:booking-microservice-picture
+*
+*
+*
