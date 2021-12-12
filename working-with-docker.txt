@@ -1,0 +1,27 @@
+Example for booking microservice
+
+-------------------------I- Creating DOCKER images/containers locally------------------------------
+0. apply requirred modifications to projet (from localhost to appropriate name)
+1. install from lifecycle to create jar file (uncheck run tests from install configuration)
+2. create a file Dockerfile
+3. docker build -t booking-microservice-picture .
+4. docker run --name booking-microservice -p 8083:8083 booking-microservice-picture
+
+------------------------II- Pushing DOCKER images to DOCKERHUB---------------------------------------
+5. change name of image using : docker tag api-gateway-picture lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
+6. push image to docker hub : docker push lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
+
+------------------------III- Pulling DOCKER images and using docker composite.yml file--------------------------------------------------
+STOPPED AT THIS STEP
+
+
+
+------notes:
+*mysql container---> sql credentials: root/rootpwd
+
+Docker images names:
+* docker pull lotfi01fifi/car-location-microservices_repo_01:vehicule-microservice-picture
+* docker pull lotfi01fifi/car-location-microservices_repo_01:spring-eureka-picture
+* docker pull lotfi01fifi/car-location-microservices_repo_01:config-server-picture
+* docker pull lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
+* docker pull lotfi01fifi/car-location-microservices_repo_01:booking-microservice-picture
