@@ -12,7 +12,9 @@ Example for booking microservice
 6. push image to docker hub : docker push lotfi01fifi/car-location-microservices_repo_01:api-gateway-picture
 
 ------------------------III- Pulling DOCKER images and using docker composite.yml file--------------------------------------------------
-STOPPED AT THIS STEP
+7. pulling the images
+8. creating the composite.yml file
+9. running the composite.yml file and the whole project
 
 
 
